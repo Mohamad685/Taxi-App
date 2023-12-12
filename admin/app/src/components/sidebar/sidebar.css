@@ -1,4 +1,27 @@
-.sidebar-container{
-    background-color: #2A3345;
-    height: 100vh;
+.sidebar-container {
+  background-color: #2a3345;
+  height: 100vh;
+}
+
+.sidebar-title {
+  padding: 20px ;
+  margin-bottom: 30px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-list {
+  padding: 0;
+  list-style-type: none;
+}
+
+.sidebar-list-item {
+  padding: 20px;
+  font-size: 18px;
+  color: #9e9ea4;
+}
+
+.sidebar-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }
