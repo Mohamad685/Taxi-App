@@ -1,9 +1,8 @@
-/* NavBar.css */
 .navbar-container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-    background-color:#E1F3FD;
+	background-color: #e1f3fd;
 }
 
 .left-part {
@@ -20,21 +19,34 @@
 }
 
 .right-part {
-    
-    padding-right: 2.5rem;
+	padding-right: 2.5rem;
 }
 
 .nav-list {
-    
 	list-style: none;
 	display: flex;
 	margin: 0;
-    justify-content: space-between;
-    gap: 5rem;
+	justify-content: space-between;
+	gap: 3rem;
 }
-
 
 .nav-list a {
 	text-decoration: none;
 	color: black;
+}
+
+
+@media (max-width: 768px) {
+	.left-part {
+		font-size: 1.5rem; 
+		padding-left: 1rem;
+	}
+
+	.right-part {
+		padding-right: 1rem; 
+	}
+
+	.nav-list {
+		gap: 2rem;
+	}
 }

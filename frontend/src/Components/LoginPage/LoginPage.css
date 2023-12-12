@@ -1,0 +1,92 @@
+
+.login-container {
+	background-color:  #f0f0f0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	gap: 1rem;
+}
+
+.form {
+	width: 100%;
+	max-width: 400px; 
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background-color: black;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	color: #fff;
+}
+
+.label {
+	display: block;
+	color: #fff;
+	margin-bottom: 2px;
+
+}
+
+.input {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 16px;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+.password-input{
+	margin-bottom: 0px;
+}
+
+.login-button {
+	width: 100%;
+	padding: 10px;
+	background-color: #f7c621;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	margin-top: 14px;
+}
+
+.login-button:hover {
+	background-color: #ae8b18;
+}
+.signup-statement{
+	font-size: x-small;
+
+}
+.signup-button{
+	background-color: transparent;
+	color: #f7c621;
+	cursor: pointer;
+	font-size: small;
+	text-decoration: none;
+}
+.car-image {
+	width: 100%;
+	max-width: 600px;
+}
+.error-message {
+	color: red;
+	margin-bottom: 8px;
+	font-size: small;
+  }
+
+@media (min-width: 769px) {
+	
+	.login-container {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	.form {
+		width: 50%; 
+	}
+}
+
+@media (max-height: 600px) {
+	.login-container {
+		padding-top: 10px;
+	}
+}
