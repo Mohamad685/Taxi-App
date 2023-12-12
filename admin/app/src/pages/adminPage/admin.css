@@ -1,0 +1,14 @@
+.admin-container{
+    width: 100vw;
+    color: white;
+}
+
+.sidebar-section{
+    flex: 0 0 15%; 
+}
+
+.right-section{
+    margin-top: 50px;
+    margin-left: 20px;
+    flex: 0 0 80%; 
+}
