@@ -3,6 +3,8 @@
 	justify-content: space-between;
 	align-items: center;
 	background-color: #e1f3fd;
+	z-index: 1;
+	position: relative;
 }
 
 .left-part {
@@ -35,15 +37,14 @@
 	color: black;
 }
 
-
 @media (max-width: 768px) {
 	.left-part {
-		font-size: 1.5rem; 
+		font-size: 1.5rem;
 		padding-left: 1rem;
 	}
 
 	.right-part {
-		padding-right: 1rem; 
+		padding-right: 1rem;
 	}
 
 	.nav-list {
