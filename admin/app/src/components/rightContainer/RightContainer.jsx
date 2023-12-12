@@ -3,6 +3,7 @@ import './rightContainer.css'
 import Dashboard from "../Dashboard/Dashboard";
 import UsersSection from '../UsersSection/UsersSection'
 import ManageDrivers from "../ManageDrivers/ManageDrivers";
+import MessagesSection from "../Messages/MessagesSection";
 
 function RightContainer() {
   return (
@@ -10,6 +11,7 @@ function RightContainer() {
       <Dashboard />
       <UsersSection />
       <ManageDrivers />
+      <MessagesSection />
     </div>
   );
 }
