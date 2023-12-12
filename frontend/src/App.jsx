@@ -1,21 +1,24 @@
-import NavBar from './Components/NavBar/NavBar';
-import "./Components/styles/base.css";
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import "./Components/styles/index.css";
-
+// import Home from './Home';
+// import Driver from './Driver';
+// import GetDrive from './GetDrive';
+// import Login from './Login';
+import NavBar from './Components/NavBar/NavBar';
 
 const App = () => {
   return (
-    <div className="App flex column">
-      <BrowserRouter>
-        <NavBar />
-        {/* <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/myProducts" element={<MyProducts />} />
-        </Routes> */}
-      </BrowserRouter>
-    </div>
+    <Router>
+      <NavBar />
+      {/* <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/driver" component={Driver} />
+        <Route path="/get-drive" component={GetDrive} />
+        <Route path="/login" component={Login} />
+      </Switch> */}
+    </Router>
   );
 };
 

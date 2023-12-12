@@ -1,0 +1,40 @@
+/* NavBar.css */
+.navbar-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    background-color:#E1F3FD;
+}
+
+.left-part {
+	color: black;
+	background-color: #f7c621;
+	width: 50%;
+	border-radius: 0px 0px 70px 0px;
+	height: 75px;
+	display: flex;
+	align-items: center;
+	font-size: 2rem;
+	font-weight: 600;
+	padding-left: 2.5rem;
+}
+
+.right-part {
+    
+    padding-right: 2.5rem;
+}
+
+.nav-list {
+    
+	list-style: none;
+	display: flex;
+	margin: 0;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+
+.nav-list a {
+	text-decoration: none;
+	color: black;
+}
