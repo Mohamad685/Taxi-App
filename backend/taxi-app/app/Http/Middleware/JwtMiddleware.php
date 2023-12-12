@@ -9,6 +9,7 @@ class JwtMiddleware
 {
     protected $except = [
         '/api/register', 
+        '/api/login',
     ];
 
     public function handle($request, Closure $next)
