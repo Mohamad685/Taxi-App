@@ -24,6 +24,8 @@ class User extends Authenticatable implements JWTsubject
         'email',
         'password',
         'type_id',
+        'img_url',
+        'invitation_code',
     ];
 
     public function type()
