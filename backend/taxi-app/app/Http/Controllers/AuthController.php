@@ -83,49 +83,23 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
+
+            // Check if the user is a driver
+            if ($user->isDriver()) {
+                // Check if the driver record exists and if not lof the driver out
+                if (!Driver::where('user_id', $user->id)->exists()) {
+                    Auth::logout();
+                    return response()->json(['message' => 'Driver record not found'], 401);
+                }
+            }
+
             $token = JWTAuth::fromUser($user);
 
             return response()->json(['token' => $token]);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
-
     }
 
-    public function acceptDriver(Request $request, $pendingDriverId)
-    {
-        // Validate the request, check if the authenticated user is an admin, etc.
-        $user = auth()->user();
-
-        if (!$user || !$user->isAdmin()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $pendingDriver = PendingDriver::findOrFail($pendingDriverId);
-        // Create a driver record
-        $driver = Driver::create([
-            'user_id' => $pendingDriver->user_id,
-            'license' => $pendingDriver->license,
-            'status' => 'busy', 
-        ]);
-
-        $pendingDriver->delete();
-        return response()->json(['driver' => $driver, 'message' => 'Driver accepted successfully']);
-    }
-
-    public function rejectDriver(Request $request, $pendingDriverId)
-    {
-        // Validate the request, check if the authenticated user is an admin, etc.
-        $user = auth()->user();
-
-        if (!$user || !$user->isAdmin()) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
-        $pendingDriver = PendingDriver::findOrFail($pendingDriverId);
-        $pendingDriver->delete();
-        return response()->json(['message' => 'Driver rejected successfully']);
-        
-    }
 }
 
