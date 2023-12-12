@@ -1,21 +1,19 @@
 import React from "react";
-import './dashboard.css'
+import "./dashboard.css";
 
 import {
-    BsFillArchiveFill,
-    BsFillGrid3X3GapFill,
-    BsPeopleFill,
-    BsFillBellFill,
-  } from "react-icons/bs";
+  BsFillArchiveFill,
+  BsFillGrid3X3GapFill,
+  BsPeopleFill,
+  BsFillBellFill,
+} from "react-icons/bs";
 
 function Dashboard() {
   return (
     <div>
-      <div className="main-title flex">
-        <h3>DASHBOARD</h3>
-      </div>
+      <h3 className="main-title">DASHBOARD</h3>
 
-      <div className="main-cards">
+      <div className="main-cards flex">
         <div className="card flex">
           <div className="card-items flex">
             <h3>PRODUCTS</h3>
