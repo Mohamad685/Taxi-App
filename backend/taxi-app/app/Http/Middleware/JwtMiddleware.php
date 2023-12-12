@@ -7,8 +7,16 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JwtMiddleware
 {
+    protected $except = [
+        '/api/register', 
+    ];
+
     public function handle($request, Closure $next)
     {
+        if (in_array($request->getRequestUri(), $this->except)) {
+            return $next($request);
+        }
+
         try {
             $user = JWTAuth::parseToken()->authenticate();
         } catch (\Exception $e) {
