@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\JwtMiddleware;
+use App\Http\Controllers\AdminApproveDriverController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['jwt.auth'])->group(function () {
-    Route::post('/accept-driver/{id}', [AuthController::class, 'acceptDriver']);
-    Route::post('/reject-driver/{id}', [AuthController::class, 'rejectDriver']);
+    Route::post('/accept-driver/{id}', [AdminApproveDriverController::class, 'acceptDriver']);
+    Route::post('/reject-driver/{id}', [AdminApproveDriverController::class, 'rejectDriver']);
 });
 

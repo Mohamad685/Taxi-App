@@ -73,7 +73,7 @@ class User extends Authenticatable implements JWTsubject
 
     public function isDriver()
     {
-        return $this->type && $this->type->name === 'passenger';
+        return $this->type && $this->type->name === 'driver';
     }
 
 }
