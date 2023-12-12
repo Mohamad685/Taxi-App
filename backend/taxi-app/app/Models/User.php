@@ -60,4 +60,20 @@ class User extends Authenticatable implements JWTsubject
     {
         return [];
     }
+
+    public function isAdmin()
+    {
+        return $this->type && $this->type->name === 'admin';
+    }
+    
+    public function isPassenger()
+    {
+        return $this->type && $this->type->name === 'passenger';
+    }
+
+    public function isDriver()
+    {
+        return $this->type && $this->type->name === 'passenger';
+    }
+
 }
