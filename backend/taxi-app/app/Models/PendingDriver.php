@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PendingDriver extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'License'];
+    protected $fillable = ['user_id', 'license'];
 
     public function user()
     {
