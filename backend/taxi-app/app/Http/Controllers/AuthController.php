@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Models\PendingDriver;
 
 class AuthController extends Controller
 {
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'type' => 'required|in:admin,driver,passenger',
             'img_url' => 'sometimes|string',
             'invitation_code' => 'sometimes|required_if:type,admin|exists:users,invitation_code',
+            'license' => 'sometimes|string|required_if:type,driver',
         ]);
     
         $type = DB::table('types')->where('name', $request->input('type'))->first();
@@ -38,15 +40,37 @@ class AuthController extends Controller
                 return response()->json(['error' => 'Invalid or missing invitation code for admin registration'], 403);
             }
         }
-    
-        $user = User::create([
-            'first_name' => $request->input('first_name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
-            'type_id' => $type->id,
-            'img_url' => $request->input('img_url'),
-        ]);
+
+        if ($request->input('type') === 'driver') {
+
+            $license = $request->input('license');
+
+            if (!$license) {
+                return response()->json(['error' => 'License is required for driver registration'], 403);
+            }
+            $user = User::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'type_id' => $type->id,
+                'img_url' => $request->input('img_url'),
+            ]);
+        
+            $pendingDriver = PendingDriver::create([
+                'user_id' => $user->id,
+                'license' => $license, 
+            ]);
+        } else {
+            $user = User::create([
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+                'type_id' => $type->id,
+                'img_url' => $request->input('img_url'),
+            ]);
+        }
     
         return response()->json(['user' => $user, 'message' => 'User registered successfully'], 201);
     }
