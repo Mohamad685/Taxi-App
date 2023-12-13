@@ -43,5 +43,20 @@ class RatingController extends Controller
         ]);
     
         return response()->json(['message' => 'Rating recorded successfully'], 200);
-    }    
+    }   
+    
+    public function getAverageRating($ratedUserId)
+    {
+        $ratedUser = User::findOrFail($ratedUserId);
+        $ratings = Rating::where('rated_user_id', $ratedUser->id)->get();
+
+        if ($ratings->isEmpty()) {
+            return response()->json(['average_rating' => null, 'message' => 'No ratings available for this user'], 200);
+        }
+        
+        $totalRating = $ratings->sum('rating');
+        $averageRating = $totalRating / $ratings->count();
+
+        return response()->json(['average_rating' => $averageRating], 200);
+    }
 }
