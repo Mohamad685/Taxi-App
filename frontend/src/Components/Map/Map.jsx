@@ -3,13 +3,13 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const MapContainer = ({ location }) => {
   const mapStyles = {
-    height: '320px',
-    width: '900px',
+    height: '300px',
+    width: '750px',
   };
 
   const defaultCenter = {
-    lat: location.lat,
-    lng: location.lng,
+    lat: 33.8938,
+    lng: 35.5018,
   };
 
   return (
