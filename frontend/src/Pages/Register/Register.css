@@ -1,0 +1,101 @@
+.car-side-image {
+  width: 60%;
+  max-width: 100%;
+}
+.register-title{
+  font-size: large;
+  font-weight: 600;
+  
+}
+
+.register-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1rem;
+  background-color: #f0f0f0;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: black;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.register-label {
+  display: block;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.register-input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+.name-fields {
+  display: flex;
+  gap: 8px;
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f7c621;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
+.register-button:hover {
+  background-color: #ae8b18;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 8px;
+  font-size: small;
+}
+.login-statement{
+  font-size: small;
+}
+.login-small-button{
+  background-color: transparent;
+	color: #f7c621;
+	cursor: pointer;
+	font-size: small;
+	text-decoration: none;
+}
+.user-type-radio{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (min-width: 769px) {
+  .register-form {
+    width: 50%;
+    max-width: 100%;
+  }
+
+  .register-container {
+    flex-direction: row;
+  }
+}

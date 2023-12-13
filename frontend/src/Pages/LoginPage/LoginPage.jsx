@@ -32,6 +32,7 @@ const Login = () => {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						className="input"
+						placeholder="Username"
 					/>
 				</label>
 				<label className="label">
@@ -41,6 +42,7 @@ const Login = () => {
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						className="input password-input"
+						placeholder="Password"
 					/>
 				</label>
 				<span className="signup-statement">
