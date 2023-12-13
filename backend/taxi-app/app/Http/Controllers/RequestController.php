@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Request as RideRequest;
 use App\Models\Location;
 use App\Models\User;
+use App\Models\Ride;
 
 class RequestController extends Controller
 {
@@ -48,12 +49,23 @@ class RequestController extends Controller
             return response()->json(['error' => 'Unauthorized to update the status of this request'], 403);
         }
 
+        // Update the status of the ride request
         $rideRequest->update([
             'status' => $request->input('status'),
         ]);
 
+        if ($request->input('status') === 'accepted') {
+            // Create a new record in the rides table
+            Ride::create([
+                'request_id' => $rideRequest->id,
+                'driver_id' => $driver->id,
+                'passenger_id' => $rideRequest->passenger_id,
+                'ride_date' => now(), 
+                'ride_status' => 'accepted',
+            ]);
+        }
+
         return response()->json(['message' => 'Ride request status updated successfully'], 200);
     }
-
 
 }
