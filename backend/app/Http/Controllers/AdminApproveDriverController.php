@@ -17,7 +17,7 @@ class AdminApproveDriverController extends Controller
 
     public function getDriversRequests()
     {
-        if (Auth::user()->type_id == 1) {
+        if (Auth::user()->type_id == 457789) {
             $requests = PendingDriver::all();
             return response()->json(['requests' => $requests], 200);
         }

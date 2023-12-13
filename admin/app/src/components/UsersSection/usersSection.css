@@ -18,13 +18,9 @@ td{
 
 i{
     padding-right: 5px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .delete-btn{
     color: red;
-}
-
-.edit-btn{
-    color: #2e7d32;
 }

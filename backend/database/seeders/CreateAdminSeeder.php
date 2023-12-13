@@ -19,7 +19,7 @@ class CreateAdminSeeder extends Seeder
             'last_name' => 'safa',
             'email' => 'ali@taxiapp.com',
             'password' => Hash::make('password123'),
-            'type_id' => 1,
+            'type_id' => 457789,
             'img_url' => 'img.com',
             'invitation_code' => Str::random(32),
         ]);

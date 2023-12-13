@@ -27,7 +27,7 @@ function UsersSection() {
         <th>L_Name</th>
         <th>Email</th>
         <th>Rating</th>
-        <th>Options</th>
+        <th>Delete</th>
         {users.map((user) => <UserItem user={user}/>)}
       </table>
     </div>

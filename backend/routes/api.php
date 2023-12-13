@@ -8,6 +8,8 @@ use App\Http\Controllers\AdminApproveDriverController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MessageController;
+
 
 
 /*
@@ -34,8 +36,10 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/ride-requests/create', [RequestController::class, 'create']);
     Route::post('/ride-requests/update/{id}', [RequestController::class, 'updateStatus']);
 
-    //Users APIs
+    //Admin APIs
     Route::get('/getAllUsers', [UserController::class, 'getAllUsers']);
+    Route::get('/getUsersAndRidesNumber', [UserController::class, 'getUsersAndRidesNumber']);
+
     Route::post('/deleteUser', [UserController::class, 'deleteUser']);
 
 });

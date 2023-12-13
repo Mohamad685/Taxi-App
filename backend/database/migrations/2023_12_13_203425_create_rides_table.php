@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('requests', function (Blueprint $table) {
+        Schema::create('rides', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('passenger_id');
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->string("current_location");
-            $table->string("destination");
+            $table->unsignedBigInteger('driver_id');
+            $table->enum('status', ['completed', 'in progress', 'cancelled'])->default('in progress');
             $table->timestamps();
+
             $table->foreign('passenger_id')->references('id')->on('users');
+            $table->foreign('driver_id')->references('id')->on('drivers');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('requests');
+        Schema::dropIfExists('rides');
     }
 };

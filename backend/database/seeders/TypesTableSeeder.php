@@ -14,9 +14,9 @@ class TypesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('types')->insert([
-            ['name' => 'admin'],
-            ['name' => 'driver'],
-            ['name' => 'passenger'],
+            ['id'=>457789, 'name' => 'admin'],
+            ['id'=>452156, 'name' => 'driver'],
+            ['id'=>451564, 'name' => 'passenger'],
         ]);
     }
 }
