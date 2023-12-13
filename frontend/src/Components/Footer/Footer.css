@@ -1,0 +1,72 @@
+.footer-container { 
+	background-color: #282828;
+	z-index: 1;
+	position: relative;
+    min-height: 200px;
+    max-height: 250px;
+    padding-top: 50px ;
+ } 
+
+ .footerlink:onhover{
+    color: gray;
+    transition: 200ms;
+ }
+ .footerlink{
+
+    text-decoration: none;
+    font-size: larger;
+     color: white;
+ }
+    
+.logo{
+margin-top: 3rem;
+margin-bottom: 3rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;  
+}
+.logo1{
+    background-image: url("../../assets/logos/facebook.png"
+    );
+}
+.logo2{
+    background-image: url("../../assets/logos/twitter.png");
+}
+.logo3{
+    background-image: url("../../assets/logos/insta.png");
+}
+.logo4{
+    background-image: url("../../assets/logos/linkedin.png");
+}
+.right-part {
+	padding-right: 2.5rem;
+}
+
+.footer-list {
+	list-style: none;
+	display: flex;
+	margin: 0;
+	justify-content: center;
+	gap: 3rem;
+}
+
+.nav-list a {
+	text-decoration: none;
+	color: black;
+}
+
+@media (max-width: 768px) {
+	.left-part {
+		font-size: 1.5rem;
+		padding-left: 1rem;
+	}
+
+	.right-part {
+		padding-right: 1rem;
+	}
+
+	.nav-list {
+		gap: 2rem;
+	}
+}
