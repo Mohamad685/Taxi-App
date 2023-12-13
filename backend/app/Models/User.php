@@ -76,4 +76,14 @@ class User extends Authenticatable implements JWTsubject
         return $this->type && $this->type->name === 'driver';
     }
 
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
 }
