@@ -14,7 +14,7 @@ export const sendRequest = async ({
       data: body,
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": `${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
 

@@ -2,7 +2,7 @@ import React from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 
-function UserItem({ manageDrivers }) {
+function UserItem({ manageDrivers, user }) {
   return (
     <>
       {manageDrivers ? (
@@ -17,13 +17,11 @@ function UserItem({ manageDrivers }) {
         </tr>
       ) : (
         <tr>
-          <td>1</td>
-          <td>ahmad</td>
-          <td>rammal</td>
-          <td>ahmad.rammal@gmail.com</td>
-          <td>23156as4d6a5s4d894qwe89456as4d654qwe9898asd654qwe</td>
-          <td>200</td>
-          <td>4</td>
+          <td>{user.id}</td>
+          <td>{user.first_name}</td>
+          <td>{user.last_name}</td>
+          <td>{user.email}</td>
+          <td>{user.id}</td>
           <td>
             <i className="edit-btn">
               <CiEdit />

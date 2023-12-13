@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./dashboard.css";
 
+import { sendRequest } from "../../request";
+
 function Dashboard() {
+
   return (
     <div>
       <h3 className="main-title">DASHBOARD</h3>

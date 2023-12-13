@@ -1,8 +1,22 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./usersSection.css";
+import { sendRequest } from "../../request";
 
 import UserItem from "../UserItem";
 function UsersSection() {
+  const [users, setUsers] = useState([]);
+  const getUsers = async() => {
+    const response = await sendRequest({
+      route:'getAllUsers',
+      token:localStorage.getItem('token')
+    })
+    setUsers(response.data.users);
+  }
+
+  useEffect(() => {
+    getUsers();
+  }, [])
+
   return (
     <div>
       <h3 className="main-title">USERS</h3>
@@ -12,17 +26,9 @@ function UsersSection() {
         <th>F_Name</th>
         <th>L_Name</th>
         <th>Email</th>
-        <th>Password</th>
-        <th>RatingsNb</th>
         <th>Rating</th>
         <th>Options</th>
-        <UserItem />
-        <UserItem />
-        <UserItem />
-        <UserItem />
-        <UserItem />
-        <UserItem />
-        <UserItem />
+        {users.map((user) => <UserItem user={user}/>)}
       </table>
     </div>
   );
