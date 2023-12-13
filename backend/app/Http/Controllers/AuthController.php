@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Models\PendingDriver;
 use App\Models\Driver;
+use PharIo\Manifest\Author;
 
 class AuthController extends Controller
 {
@@ -82,9 +83,9 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = User::user();
+            $user = Auth::user();
             // Check if the user is a driver
-            if ($user->isDriver()) {
+            if ($user->type_id == 2) {
                 // Check if the driver record exists and if not lof the driver out
                 if (!Driver::where('user_id', $user->id)->exists()) {
                     Auth::logout();

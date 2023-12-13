@@ -14,21 +14,34 @@ use App\Models\Driver;
 
 class AdminApproveDriverController extends Controller
 {
+
+    public function getDriversRequests()
+    {
+        if (Auth::user()->type_id == 1) {
+            $requests = PendingDriver::all();
+            return response()->json(['requests' => $requests], 200);
+        }
+        return response()->json(['status' => 'Unauthorised'] , 401);
+
+    }
     public function acceptDriver(Request $request, $pendingDriverId)
     {
         // Validate the request, check if the authenticated user is an admin, etc.
         $user = auth()->user();
 
-        if (!$user || !$user->isAdmin()) {
+        // if (!$user || !$user->isAdmin()) {
+        //     return response()->json(['error' => 'Unauthorized'], 403);
+        // }
+
+        if (!$user || !$user->type_id == 2) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-
         $pendingDriver = PendingDriver::findOrFail($pendingDriverId);
         // Create a driver record
         $driver = Driver::create([
             'user_id' => $pendingDriver->user_id,
             'license' => $pendingDriver->license,
-            'status' => 'busy', 
+            'status' => 'busy',
         ]);
 
         $pendingDriver->delete();
@@ -40,15 +53,16 @@ class AdminApproveDriverController extends Controller
         // Validate the request, check if the authenticated user is an admin, etc.
         $user = auth()->user();
 
-        if (!$user || !$user->isAdmin()) {
+        // if (!$user || !$user->isAdmin()) {
+        //     return response()->json(['error' => 'Unauthorized'], 403);
+        // }
+
+        if (!$user || !$user->type_id == 2) {
             return response()->json(['error' => 'Unauthorized'], 403);
         }
-
+        
         $pendingDriver = PendingDriver::findOrFail($pendingDriverId);
         $pendingDriver->delete();
         return response()->json(['message' => 'Driver rejected successfully']);
-        
     }
 }
-
-

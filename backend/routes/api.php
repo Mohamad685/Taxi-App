@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['jwt.auth'])->group(function () {
+    Route::get('getDriversRequests', [AdminApproveDriverController::class, 'getDriversRequests']);
     Route::post('/accept-driver/{id}', [AdminApproveDriverController::class, 'acceptDriver']);
     Route::post('/reject-driver/{id}', [AdminApproveDriverController::class, 'rejectDriver']);
     Route::post('/ride-requests/create', [RequestController::class, 'create']);
@@ -35,6 +36,7 @@ Route::middleware(['jwt.auth'])->group(function () {
 
     //Users APIs
     Route::get('/getAllUsers', [UserController::class, 'getAllUsers']);
+    Route::post('/deleteUser', [UserController::class, 'deleteUser']);
 
 });
 

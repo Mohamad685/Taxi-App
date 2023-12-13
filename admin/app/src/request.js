@@ -4,7 +4,6 @@ export const sendRequest = async ({
   route,
   body,
   method = "GET",
-  token = "",
 }) => {
 
   try {
@@ -14,7 +13,7 @@ export const sendRequest = async ({
       data: body,
       headers: {
         "Content-Type": "multipart/form-data",
-        "Authorization": `Bearer ${token}`,
+        "Authorization": `Bearer ${localStorage.getItem('token')}`,
       },
     });
 
