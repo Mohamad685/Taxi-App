@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import React from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const Map = () => {
-  useEffect(() => {
-    // Initialize the map
-    const map = L.map('map').setView([51.505, -0.09], 13);
+const MapContainer = ({ location }) => {
+  const mapStyles = {
+    height: '320px',
+    width: '900px',
+  };
 
-    // Add a tile layer (replace the URL with your own)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-    }).addTo(map);
-  }, []);
+  const defaultCenter = {
+    lat: location.lat,
+    lng: location.lng,
+  };
 
-  return <div id="map" style={{ height: '400px' }} />;
+  return (
+    <LoadScript googleMapsApiKey="AIzaSyBNR-2gxzagHoZIHkpQ-RCYrYxMnKRhgLc">
+      <GoogleMap mapContainerStyle={mapStyles} zoom={10} center={defaultCenter}>
+        <Marker position={defaultCenter} />
+      </GoogleMap>
+    </LoadScript>
+  );
 };
 
-export default Map;
+export default MapContainer;
+
