@@ -82,8 +82,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
+            $user = User::user();
             // Check if the user is a driver
             if ($user->isDriver()) {
                 // Check if the driver record exists and if not lof the driver out
@@ -92,7 +91,6 @@ class AuthController extends Controller
                     return response()->json(['message' => 'Driver record not found'], 401);
                 }
             }
-
 
             $token = JWTAuth::fromUser($user);
 

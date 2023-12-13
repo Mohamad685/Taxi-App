@@ -7,6 +7,8 @@ use App\Http\Middleware\JwtMiddleware;
 use App\Http\Controllers\AdminApproveDriverController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,10 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/reject-driver/{id}', [AdminApproveDriverController::class, 'rejectDriver']);
     Route::post('/ride-requests/create', [RequestController::class, 'create']);
     Route::post('/ride-requests/update/{id}', [RequestController::class, 'updateStatus']);
+
+    //Users APIs
+    Route::get('/getAllUsers', [UserController::class, 'getAllUsers']);
+
 });
 
 Route::post('/rate/{ratedUserId}', [RatingController::class, 'rateUser']);
