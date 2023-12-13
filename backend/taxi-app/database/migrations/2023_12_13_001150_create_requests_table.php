@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->timestamps();
             $table->foreign('passenger_id')->references('id')->on('users');
-            $table->foreign('driver_id')->references('id')->on('drivers');
+            $table->foreign('driver_id')->references('id')->on('users');
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }

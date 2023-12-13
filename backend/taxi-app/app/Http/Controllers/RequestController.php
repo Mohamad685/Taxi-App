@@ -13,14 +13,14 @@ class RequestController extends Controller
     {
         $request->validate([
             'passenger_id' => 'required|exists:users,id',
-            'driver_id' => 'required|exists:drivers,id',
+            'driver_id' => 'required|exists:users,id',
             'location_id' => 'required|exists:locations,id',
         ]);
 
         $passenger = User::findOrFail($request->input('passenger_id'));
         $driver = User::findOrFail($request->input('driver_id'));
 
-        if (!$passenger->isPassenger() || !$driver->isDriver()) {
+        if (!$passenger->isPassenger()) {
             return response()->json(['error' => 'Invalid request'], 400);
         }
 
