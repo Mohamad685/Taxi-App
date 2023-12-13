@@ -41,4 +41,12 @@ Route::middleware(['jwt.auth'])->group(function () {
 });
 
 Route::post('/rate/{ratedUserId}', [RatingController::class, 'rateUser']);
-Route::get('/average-rating/{userId}', [RatingController::class, 'averageRate']);
+Route::get('/rating/average/{ratedUserId}', [RatingController::class, 'getAverageRating']);
+
+
+Route::post('/messages/send', [MessageController::class, 'sendMessage']);
+Route::post('/messages/send-to-admin', [MessageController::class, 'sendMessageToAdmin']);
+// Get messages from admin for a specific user
+Route::get('/messages/from-admin/{userId}', [MessageController::class, 'getMessagesFromAdmin']);
+// Get messages between users
+Route::get('/messages/{senderId}/{receiverId}', [MessageController::class, 'getMessagesForUser']);
