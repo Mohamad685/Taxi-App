@@ -33,4 +33,4 @@ Route::middleware(['jwt.auth'])->group(function () {
 });
 
 Route::post('/rate/{ratedUserId}', [RatingController::class, 'rateUser']);
-Route::get('/average-rating/{userId}', [RatingController::class, 'averageRate']);
+Route::get('/rating/average/{ratedUserId}', [RatingController::class, 'getAverageRating']);
