@@ -27,3 +27,6 @@ Route::middleware(['jwt.auth'])->group(function () {
     Route::post('/reject-driver/{id}', [AdminApproveDriverController::class, 'rejectDriver']);
 });
 
+Route::post('/rate/{ratedUserId}', [RatingController::class, 'rateUser']);
+Route::get('/average-rating/{userId}', [RatingController::class, 'averageRate']);
+Route::post('/ride-requests/create', [RequestController::class, 'create']);
