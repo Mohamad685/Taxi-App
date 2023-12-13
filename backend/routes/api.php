@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\JwtMiddleware;
 use App\Http\Controllers\AdminApproveDriverController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\RatingController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
