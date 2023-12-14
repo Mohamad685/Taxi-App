@@ -63,7 +63,7 @@ class MessageController extends Controller
         $sender = User::findOrFail($request->input('sender_id'));
 
         if (!$sender->isDriver() && !$sender->isPassenger()) {
-            return response()->json(['error' => 'Unauthorized.'], 403);
+            return response()->json(['error' => 'Unauthorized user'], 403);
         }
 
         //admins are of type 1
@@ -89,24 +89,28 @@ class MessageController extends Controller
 
     public function getMessagesFromAdmin($userId)
     {
-        $user = User::findOrFail($userId);
-
-        if (!$user->isDriver() && !$user->isPassenger()) {
-            return response()->json(['error' => 'Unauthorized. Only drivers and passengers can retrieve messages from admin.'], 403);
+        try {
+            $user = JWTAuth::parseToken()->authenticate();
+    
+            if (!$user->isDriver() && !$user->isPassenger()) {
+                return response()->json(['error' => 'Unauthorized. Only drivers and passengers can retrieve messages from admin.'], 403);
+            }
+    
+            $adminUsers = User::where('type_id', 1)->get(); 
+    
+            if ($adminUsers->isEmpty()) {
+                return response()->json(['error' => 'No admin users found.'], 500);
+            }
+    
+            $messages = Message::where('receiver_id', $user->id)
+                ->whereIn('sender_id', $adminUsers->pluck('id'))
+                ->with(['sender', 'receiver'])
+                ->get();
+    
+            return response()->json(['messages' => $messages]);
+        } catch (JWTException $e) {
+            return response()->json(['error' => 'Failed to authenticate.'], 401);
         }
-
-        $adminUsers = User::where('type_id', 1)->get(); 
-
-        if ($adminUsers->isEmpty()) {
-            return response()->json(['error' => 'No admin users found.'], 500);
-        }
-
-        $messages = Message::where('receiver_id', $user->id)
-            ->whereIn('sender_id', $adminUsers->pluck('id'))
-            ->with(['sender', 'receiver'])
-            ->get();
-
-        return response()->json(['messages' => $messages]);
     }
 
     public function getMessagesForUser($senderId, $receiverId)
@@ -132,4 +136,31 @@ class MessageController extends Controller
         return response()->json(['messages' => $messages]);
     }
 
+    public function sendMessageFromAdmin(Request $request, $receiverId)
+    {
+        try {
+            $admin = JWTAuth::parseToken()->authenticate();
+
+            if (!$admin->isAdmin()) {
+                return response()->json(['error' => 'Unauthorized. Only admin users can send messages from admin.'], 403);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unauthorized. Please log in.'], 401);
+        }
+
+        $request->validate([
+            'content' => 'required|string',
+        ]);
+
+        $receiver = User::findOrFail($receiverId);
+
+        $message = Message::create([
+            'sender_id' => $admin->id,
+            'receiver_id' => $receiver->id,
+            'content' => $request->input('content'),
+        ]);
+
+        return response()->json(['message' => $message, 'status' => 'Message sent from admin successfully'], 201);
+    }
 }
+
