@@ -7,6 +7,7 @@ import Login from './Pages/LoginPage/LoginPage';
 import Register from './Pages/Register/Register';
 import NavBar from './Components/NavBar/NavBar';
 import Footer from './Components/Footer/Footer';
+import DriverPage from './Pages/Driver/Driver'
 
 const App = () => {
   return (

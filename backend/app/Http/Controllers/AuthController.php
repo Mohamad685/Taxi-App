@@ -85,7 +85,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             // Check if the user is a driver
-            if ($user->type_id == 2) {
+            if ($user->type_id == 452156) {
                 // Check if the driver record exists and if not lof the driver out
                 if (!Driver::where('user_id', $user->id)->exists()) {
                     Auth::logout();
@@ -94,8 +94,13 @@ class AuthController extends Controller
             }
 
             $token = JWTAuth::fromUser($user);
+            if($user->type_id == 452156){
+                $role = 'driver';
+            }else if($user->type_id == 451564){
+                $role = 'passenger';
+            }
 
-            return response()->json(['token' => $token]);
+            return response()->json(['token' => $token, 'role'=>$role]);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
