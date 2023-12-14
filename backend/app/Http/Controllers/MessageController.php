@@ -68,9 +68,6 @@ class MessageController extends Controller
 
         //admins are of type 1
         $adminUsers = User::where('type_id', 1)->get(); 
-        // $adminUsers = User::whereHas('type', function ($query) {
-        //     $query->where('name', 'admin');
-        // })->get();
 
         if ($adminUsers->isEmpty()) {
             return response()->json(['error' => 'No admin users found.'], 500);
