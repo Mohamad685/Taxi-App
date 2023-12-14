@@ -27,8 +27,8 @@ class RequestController extends Controller
 
         $rideRequest = RideRequest::create([
             'passenger_id' => $request->input('passenger_id'),
-            'driver_id' => $request->input('driver_id'),
-            'location_id' => $request->input('location_id'),
+            'current_location' => $request->input('current_location'),
+            'destination' => $request->input('destination'),
             'status' => 'pending',
         ]);
 
