@@ -1,62 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PassengerRequestForm from '../../Components/PassengerRequest/PassengerRequest';
-
-// const DriverPage = () => {
-//   const [currentRequestIndex, setCurrentRequestIndex] = useState(0);
-//   const [requests, setRequests] = useState([]);
-
-//   useEffect(() => {
-//     // Fetch requests from the backend API
-//     const fetchRequests = async () => {
-//       try {
-//         // Replace 'your-api-endpoint' with the actual endpoint to fetch requests
-//         const response = await fetch('your-api-endpoint');
-//         const data = await response.json();
-//         setRequests(data); // Assuming the data is an array of passenger requests
-//       } catch (error) {
-//         console.error('Error fetching requests:', error);
-//       }
-//     };
-
-//     fetchRequests();
-//   }, []); // Runs once on component mount
-
-//   const handleAccept = () => {
-//     // Implement logic to send the acceptance to the backend
-//     const currentRequest = requests[currentRequestIndex];
-//     console.log(`Accepted request with ID: ${currentRequest.id}`);
-
-//     // Move to the next request
-//     setCurrentRequestIndex(currentRequestIndex + 1);
-//   };
-
-//   const handleReject = () => {
-//     // Implement logic to send the rejection to the backend
-//     const currentRequest = requests[currentRequestIndex];
-//     console.log(`Rejected request with ID: ${currentRequest.id}`);
-
-//     // Move to the next request
-//     setCurrentRequestIndex(currentRequestIndex + 1);
-//   };
-
-//   return (
-//     <div className="driver-page">
-//       <h1>Driver Page</h1>
-//       {requests.length > 0 ? (
-//         <PassengerRequestForm
-//           request={requests[currentRequestIndex]}
-//           onAccept={handleAccept}
-//           onReject={handleReject}
-//         />
-//       ) : (
-//         <p>No requests at the moment.</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default DriverPage;
-
+import FeedbackForm from '../../Components/FeedbackForm/Feedback'; // Import the FeedbackForm component
+import './Driver.css';
+import GoogleMaps from '../../Components/Map/Map';
 
 const mockRequests = [
   {
@@ -71,28 +17,75 @@ const mockRequests = [
     pickupLocation: '789 Oak St',
     dropLocation: '012 Pine St',
   },
-  // Add more mock requests as needed
 ];
 
 const DriverPage = () => {
-    const [acceptedRequests, setAcceptedRequests] = useState([]);
-    const [rejectedRequests, setRejectedRequests] = useState([]);
+  const [acceptedRequests, setAcceptedRequests] = useState([]);
+  const [rejectedRequests, setRejectedRequests] = useState([]);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+
+  const handleAccept = (requestId) => {
+    setAcceptedRequests((prevAccepted) => [...prevAccepted, requestId]);
+    setShowFeedbackForm(true);
+  };
+
+  const handleReject = (requestId) => {
+    setRejectedRequests((prevRejected) => [...prevRejected, requestId]);
+  };
+
+  const [feedbackFormData, setFeedbackFormData] = useState({
+    rating: '',
+    feedback: '',
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const handleFeedbackChange = (e) => {
+    const { id, value } = e.target;
+    setFeedbackFormData({ ...feedbackFormData, [id]: value });
+    setFormErrors({ ...formErrors, [id]: '' });
+  };
+
+  const handleFeedbackSubmit = () => {
+    const errors = {};
   
-    const handleAccept = (requestId) => {
-      // Implement logic to send the acceptance to the backend
-      // and update the state
-      setAcceptedRequests((prevAccepted) => [...prevAccepted, requestId]);
-    };
+    
+    if (!feedbackFormData.rating.trim()) {
+      errors.rating = 'Rating is required';
+    }
   
-    const handleReject = (requestId) => {
-      // Implement logic to send the rejection to the backend
-      // and update the state
-      setRejectedRequests((prevRejected) => [...prevRejected, requestId]);
-    };
+    
+    if (!feedbackFormData.feedback.trim()) {
+      errors.feedback = 'Feedback is required';
+    }
   
-    return (
-      <div className="driver-page">
-        {mockRequests.length > 0 ? (
+    if (Object.keys(errors).length > 0) {
+      
+      setFormErrors(errors);
+      return;
+    }
+  
+    setShowFeedbackForm(false);
+    setFeedbackFormData({
+      rating: '',
+      feedback: '',
+    });
+    setFormErrors({});
+  };
+
+  return (
+    <div className="driver-page">
+      {mockRequests.length > 0 ? (
+        showFeedbackForm ? (
+          
+          <FeedbackForm
+            feedbackFormData={feedbackFormData}
+            formErrors={formErrors}
+            handleFeedbackChange={handleFeedbackChange}
+            handleFeedbackSubmit={handleFeedbackSubmit}
+          />
+        ) : (
+          
           <table className="request-table">
             <thead>
               <tr>
@@ -115,11 +108,19 @@ const DriverPage = () => {
               ))}
             </tbody>
           </table>
-        ) : (
-          <p>No requests at the moment.</p>
-        )}
-      </div>
-    );
-  };
-  
-  export default DriverPage;
+        )
+      ) : (
+        <p>No requests at the moment.</p>
+      )}
+      {/* <div>
+        <GoogleMaps
+          height="400px"
+          width="550px"
+          location={location}
+        />
+      </div> */}
+    </div>
+  );
+};
+
+export default DriverPage;

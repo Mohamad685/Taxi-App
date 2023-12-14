@@ -1,0 +1,13 @@
+.feedback-form{
+	background-color: black;
+	padding: 2rem;
+	border-radius: 8px;
+	color: #ccc;
+	height: max-content;
+}
+
+.passenger-feedback-input{
+	height: 5rem;
+	border-radius: 8px;
+	padding-left: 0.5rem;
+}
