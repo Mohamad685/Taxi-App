@@ -5,11 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\User;
+use App\Models\Ride;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MessageController extends Controller
 {
     public function sendMessage(Request $request)
     {
+        try {
+            $authenticatedUserId = JWTAuth::parseToken()->authenticate()->id;
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Unauthorized. Please log in.'], 401);
+        }
+        
         $request->validate([
             'sender_id' => 'required|exists:users,id',
             'receiver_id' => 'required|exists:users,id',
@@ -18,6 +26,10 @@ class MessageController extends Controller
 
         $sender = User::findOrFail($request->input('sender_id'));
         $receiver = User::findOrFail($request->input('receiver_id'));
+
+        if ($authenticatedUserId != $sender->id) {
+            return response()->json(['error' => 'Unauthorized. Only the authenticated user can send messages.'], 403);
+        }
 
         // Check if the sender and receiver are both in a ride (only for drivers and passengers)
         if ($sender->isDriver() && $receiver->isPassenger() || $sender->isPassenger() && $receiver->isDriver()) {
@@ -99,13 +111,13 @@ class MessageController extends Controller
 
     public function getMessagesForUser($senderId, $receiverId)
     {
-        $user = Auth::user();
-
-        if (!$user || (!$user->isPassenger() && !$user->isAdmin() && !$user->isDriver())) {
+        try {
+            $authenticatedUser = JWTAuth::parseToken()->authenticate();
+        } catch (\Exception $e) {
             return response()->json(['error' => 'Unauthorized. Please log in.'], 401);
         }
 
-        $authenticatedUserId = $user->id;
+        $authenticatedUserId = $authenticatedUser->id;
 
         if ($authenticatedUserId != $senderId && $authenticatedUserId != $receiverId) {
             return response()->json(['error' => 'Unauthorized to access these messages'], 403);
@@ -119,4 +131,5 @@ class MessageController extends Controller
 
         return response()->json(['messages' => $messages]);
     }
+
 }
