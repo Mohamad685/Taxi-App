@@ -51,6 +51,7 @@ Route::get('/rating/average/{ratedUserId}', [RatingController::class, 'getAverag
 
 Route::post('/messages/send', [MessageController::class, 'sendMessage']);
 Route::post('/messages/send-to-admin', [MessageController::class, 'sendMessageToAdmin']);
+Route::post('/messages/admin/send/{receiverId}', [MessageController::class, 'sendMessageFromAdmin']);
 // Get messages from admin for a specific user
 Route::get('/messages/from-admin/{userId}', [MessageController::class, 'getMessagesFromAdmin']);
 // Get messages between users
