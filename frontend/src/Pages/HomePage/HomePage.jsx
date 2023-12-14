@@ -28,7 +28,7 @@ const HomePage = () => {
           <div className="box"></div>
           <img
             className="car-image"
-            src="../../assets/images/backpack.png"
+            src="../../assets/images/about-img.png"
             alt="Car Image"
           ></img>
         </div>
