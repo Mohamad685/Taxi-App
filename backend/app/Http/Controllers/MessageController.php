@@ -63,7 +63,7 @@ class MessageController extends Controller
         $sender = User::findOrFail($request->input('sender_id'));
 
         if (!$sender->isDriver() && !$sender->isPassenger()) {
-            return response()->json(['error' => 'Unauthorized. Only drivers and passengers can send messages to the admin.'], 403);
+            return response()->json(['error' => 'Unauthorized.'], 403);
         }
 
         //admins are of type 1
