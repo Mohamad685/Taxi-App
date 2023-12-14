@@ -68,7 +68,7 @@ const Login = () => {
         <h2>Login</h2>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <label className="label">
-          email:
+          Email:
           <input
             type="text"
             value={email}
@@ -98,11 +98,11 @@ const Login = () => {
           Login
         </button>
       </div>
-      {/* <img
+      <img
         src="../../../src/assets/images/about-img.jpg"
         alt="car"
         className="car-image"
-      ></img> */}
+      ></img>
     </div>
   );
 };
