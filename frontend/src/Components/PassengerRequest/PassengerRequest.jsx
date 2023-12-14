@@ -1,15 +1,15 @@
 import React from 'react';
+import './PassengerRequest.css';
 
 const PassengerRequestForm = ({ request, onAccept, onReject, accepted, rejected }) => {
+  if (rejected) {
+    return null;
+  }
+
   const { passengerName, pickupLocation, dropLocation } = request;
 
-  const rowStyle = {
-    backgroundColor: accepted ? 'yellow' : rejected ? 'red' : 'inherit',
-    color: accepted ? 'black' : rejected ? 'white' : 'inherit',
-  };
-
   return (
-    <tr style={rowStyle}>
+    <tr>
       <td>{passengerName}</td>
       <td>{pickupLocation}</td>
       <td>{dropLocation}</td>

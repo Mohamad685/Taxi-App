@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "./Passenger.css";
+import FeedbackForm from "../../Components/FeedbackForm/Feedback";
 import GoogleMaps from "../../Components/Map/Map";
 
 const PassengerPage = () => {
-	// Initial form data state
 	const initialFormData = {
 		pickup: "",
 		drop: "",
 		phone: "",
 	};
 
-	// Form data, errors, submission status, and feedback state
 	const [formData, setFormData] = useState(initialFormData);
 	const [formErrors, setFormErrors] = useState({});
 	const [submitted, setSubmitted] = useState(false);
@@ -19,26 +18,23 @@ const PassengerPage = () => {
 		feedback: "",
 	});
 
-	// Hardcoded location for Google Maps (replace with your actual logic)
 	const location = {
 		lat: -34.397,
 		lng: 150.644,
 	};
 
-	// Handle input change for the main form
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
 		setFormData({ ...formData, [id]: value });
 		setFormErrors({ ...formErrors, [id]: "" });
 	};
 
-	// Handle input change for the feedback form
 	const handleFeedbackChange = (e) => {
 		const { id, value } = e.target;
 		setFeedbackFormData({ ...feedbackFormData, [id]: value });
+		setFormErrors({});
 	};
 
-	// Handle submission of the main form
 	const handleSubmit = () => {
 		const errors = {};
 		Object.keys(formData).forEach((key) => {
@@ -55,9 +51,7 @@ const PassengerPage = () => {
 		setSubmitted(true);
 	};
 
-	// Handle submission of the feedback form
 	const handleFeedbackSubmit = () => {
-		// Validate feedback form data
 		const feedbackErrors = {};
 		if (
 			!feedbackFormData.rating ||
@@ -71,16 +65,13 @@ const PassengerPage = () => {
 		}
 
 		if (Object.keys(feedbackErrors).length > 0) {
-			// Handle feedback form validation errors
 			console.error("Feedback form validation errors:", feedbackErrors);
-			setFormErrors(feedbackErrors); // Update state with feedback errors
+			setFormErrors(feedbackErrors);
 			return;
 		}
 
-		// Handle feedback submission logic here
 		console.log("Submitting feedback:", feedbackFormData);
 
-		// Reset state after handling feedback
 		setFeedbackFormData({
 			rating: "",
 			feedback: "",
@@ -91,7 +82,6 @@ const PassengerPage = () => {
 	return (
 		<>
 			<div className="passenger-page">
-				{/* Display user information (replace with actual user data) */}
 				<div className="passenger-info">
 					<img
 						src="path/to/profile-pic.jpg"
@@ -102,7 +92,6 @@ const PassengerPage = () => {
 					<p>Username: </p>
 				</div>
 
-				{/* Main container for form and map */}
 				<div className="passenger-container">
 					{!submitted ? (
 						// Display main form if not submitted
@@ -167,53 +156,21 @@ const PassengerPage = () => {
 						</div>
 					) : (
 						// Display feedback form if submitted
-						<div className="feedback-form">
-							<div className="input-group">
-								<label
-									className="passenger-label"
-									htmlFor="rating">
-									Rating (1-5):
-								</label>
-								<input
-									type="number"
-									id="rating"
-									className="passenger-input"
-									placeholder="Enter rating"
-									value={feedbackFormData.rating}
-									onChange={handleFeedbackChange}
-								/>
-								<div className="error-message">{formErrors.rating}</div>
-							</div>
-
-							<div className="input-group">
-								<label
-									className="passenger-label"
-									htmlFor="feedback">
-									Feedback:
-								</label>
-								<input
-									type="text"
-									id="feedback"
-									className="passenger-feedback-input"
-									placeholder="Enter feedback"
-									value={feedbackFormData.feedback}
-									onChange={handleFeedbackChange}
-								/>
-								<div className="error-message">{formErrors.feedback}</div>
-							</div>
-
-							<button
-								type="button"
-								className="submit-button"
-								onClick={handleFeedbackSubmit}>
-								Submit Feedback
-							</button>
-						</div>
+						<FeedbackForm
+							feedbackFormData={feedbackFormData}
+							formErrors={formErrors}
+							handleFeedbackChange={handleFeedbackChange}
+							handleFeedbackSubmit={handleFeedbackSubmit}
+						/>
 					)}
 
-					{/* <div>
-						<GoogleMaps location={location} />
-					</div> */}
+					<div>
+						<GoogleMaps
+							height="300px"
+							width="750px"
+							location={location}
+						/>
+					</div>
 				</div>
 			</div>
 		</>
