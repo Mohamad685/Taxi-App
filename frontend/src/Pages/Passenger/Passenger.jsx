@@ -88,8 +88,8 @@ const PassengerPage = () => {
 						alt="Profile Pic"
 						className="profile-pic"
 					/>
-					<h2>Full Name:</h2>
-					<p>Username: </p>
+					<h2>Full Name</h2>
+					<p>Username</p>
 				</div>
 
 				<div className="passenger-container">

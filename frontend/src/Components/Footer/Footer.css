@@ -1,44 +1,49 @@
-.footer-container { 
+.footer-container {
 	background-color: #282828;
-	z-index: 1;
-	position: relative;
-    min-height: 200px;
-    max-height: 250px;
-    padding-top: 50px ;
- } 
+	bottom: 0;
+	width: 100%;
+	min-height: 200px;
+	max-height: 250px;
+	padding-top: 50px;
+	
+}
 
- .footerlink:onhover{
-    color: gray;
-    transition: 200ms;
- }
- .footerlink{
+.footerlink:hover {
+	color: gray;
+	transition: 200ms;
+}
 
-    text-decoration: none;
-    font-size: larger;
-     color: white;
- }
-    
-.logo{
-margin-top: 3rem;
-margin-bottom: 3rem;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-size: cover;  
+.footerlink {
+	text-decoration: none;
+	font-size: larger;
+	color: white;
 }
-.logo1{
-    background-image: url("../../assets/logos/facebook.png"
-    );
+
+.logo {
+	margin-top: 3rem;
+	margin-bottom: 3rem;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-size: cover;
 }
-.logo2{
-    background-image: url("../../assets/logos/twitter.png");
+
+.logo1 {
+	background-image: url("../../assets/logos/facebook.png");
 }
-.logo3{
-    background-image: url("../../assets/logos/insta.png");
+
+.logo2 {
+	background-image: url("../../assets/logos/twitter.png");
 }
-.logo4{
-    background-image: url("../../assets/logos/linkedin.png");
+
+.logo3 {
+	background-image: url("../../assets/logos/insta.png");
 }
+
+.logo4 {
+	background-image: url("../../assets/logos/linkedin.png");
+}
+
 .right-part {
 	padding-right: 2.5rem;
 }
@@ -68,5 +73,55 @@ margin-bottom: 3rem;
 
 	.nav-list {
 		gap: 2rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.footer-container {
+		min-height: 150px;
+		max-height: 200px;
+		padding-top: 30px;
+	}
+
+	.footerlink {
+		font-size: 1rem;
+
+		.logo{
+			width: 30px;
+			height: 30px;
+		}
+
+		.right-part {
+			padding-right: 1rem;
+		}
+
+		.footer-list {
+			gap: 2rem;
+		}
+	}
+
+	@media (max-width: 300px) {
+		.footer-container {
+			min-height: 100px;
+			max-height: 150px;
+			padding-top: 20px;
+		}
+
+		.footerlink {
+			font-size: 0.8rem;
+		}
+
+		.logo {
+			width: 20px;
+			height: 20px;
+		}
+
+		.right-part {
+			padding-right: 0.5rem;
+		}
+
+		.footer-list {
+			gap: 1rem;
+		}
 	}
 }
