@@ -1,0 +1,33 @@
+.admin-logo{
+    width: 500px;
+}
+
+.form{
+    width: 600px;
+}
+
+.input-text{
+    width: 100%;
+    height: 60px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.input-text:focus{
+    outline: none;
+}
+
+.login-btn{
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #3CC1CD;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.login-btn:hover{
+    cursor: pointer;
+}

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTsubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,10 +19,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'type_id',
+        'img_url',
+        'invitation_code',
     ];
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -30,7 +40,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
     /**
@@ -39,7 +48,42 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
+    public function isAdmin()
+    {
+        return $this->type && $this->type->name === 'admin';
+    }
+    
+    public function isPassenger()
+    {
+        return $this->type && $this->type->name === 'passenger';
+    }
+
+    public function isDriver()
+    {
+        return $this->type && $this->type->name === 'driver';
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
 }
