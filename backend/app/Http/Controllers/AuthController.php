@@ -92,6 +92,7 @@ class AuthController extends Controller
                     return response()->json(['message' => 'Driver record not found'], 401);
                 }
             }
+            $role='';
 
             $token = JWTAuth::fromUser($user);
             if($user->type_id == 452156){
